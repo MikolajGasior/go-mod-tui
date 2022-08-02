@@ -1,7 +1,6 @@
-[![GoDoc](https://godoc.org/github.com/gasiordev/go-tui?status.svg)](https://godoc.org/github.com/gasiordev/go-tui)
-[![Build Status](https://travis-ci.com/gasiordev/go-tui.svg?branch=master)](https://travis-ci.com/gasiordev/go-tui)
-
 # go-tui
+
+**This project is no longer maintained**
 
 Package `gasiordev/go-tui` is meant to simplify printing on terminal window by
 specifying boxes and adding static or dynamic content to it. These boxes here
