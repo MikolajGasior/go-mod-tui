@@ -1,6 +1,6 @@
 # go-mod-tui
 
-##This project is not maintained
+## This project is not maintained
 
 Package `MikolajGasior/go-mod-tui` is meant to simplify printing on terminal window by
 specifying boxes and adding static or dynamic content to it. These boxes here
