@@ -1,7 +1,7 @@
 VERSION?=$$(cat version.go | grep VERSION | cut -d"=" -f2 | sed 's/"//g')
 GOFMT_FILES?=$$(find . -name '*.go')
-PROJECT_BIN?=go-tui
-PROJECT_SRC?=github.com/gasiordev/go-tui
+PROJECT_BIN?=go-mod-tui
+PROJECT_SRC?=github.com/MikolajGasior/go-mod-tui
 
 default: build
 

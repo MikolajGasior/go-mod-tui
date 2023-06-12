@@ -1,8 +1,8 @@
-# go-tui
+# go-mod-tui
 
-**This project is no longer maintained**
+##This project is not maintained
 
-Package `gasiordev/go-tui` is meant to simplify printing on terminal window by
+Package `MikolajGasior/go-mod-tui` is meant to simplify printing on terminal window by
 specifying boxes and adding static or dynamic content to it. These boxes here
 are called panes and they are defined by vertical or horizontal split.
 Terminal window is main pane which can be split into another panes, and these
@@ -26,7 +26,7 @@ Ensure you have your
 run the following:
 
 ```
-go get -u github.com/gasiordev/go-tui
+go get -u github.com/MikolajGasior/go-mod-tui
 ```
 
 ### Example
@@ -38,7 +38,7 @@ package main
 
 import (
     "os"
-    "github.com/gasiordev/go-tui"
+    "github.com/MikolajGasior/go-mod-tui"
 )
 
 // TUI has onDraw event and a function can be attached to it. onDraw is

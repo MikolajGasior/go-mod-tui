@@ -20,7 +20,7 @@ Install
 
 Ensure you have your workspace directory created and run the following:
 
-    go get -u github.com/gasiordev/go-tui
+    go get -u github.com/MikolajGasior/go-mod-tui
 
 Example
 
@@ -30,7 +30,7 @@ See below sample with explanation in comments.
 
     import (
         "os"
-        "github.com/gasiordev/go-tui"
+        "github.com/MikolajGasior/go-mod-tui"
     )
 
     // TUI has onDraw event and a function can be attached to it. onDraw is
