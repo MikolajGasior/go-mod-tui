@@ -36,7 +36,7 @@ package main
 
 import (
     "os"
-    "github.com/mikolajgs/terminal-ui"
+    tui "github.com/mikolajgs/terminal-ui"
 )
 
 // TUI has onDraw event and a function can be attached to it. onDraw is
