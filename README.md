@@ -1,5 +1,7 @@
 # terminal-ui
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/mikolajgs/terminal-ui.svg)](https://pkg.go.dev/github.com/mikolajgs/terminal-ui) [![Go Report Card](https://goreportcard.com/badge/github.com/mikolajgs/terminal-ui)](https://goreportcard.com/report/github.com/mikolajgs/terminal-ui) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mikolajgs/terminal-ui?sort=semver)
+
 The `terminalui` package is designed to simplify output to a terminal window by allowing the specification of panes with static or dynamic content. These panes, defined by either vertical or horizontal splits, structure the terminal window. The main pane, which represents the entire terminal window, can be split into additional panes, which in turn can be further subdivided, much like the functionality found in the popular tool, tmux.
 
 Pane sizes can be specified either as a percentage or by a fixed number of characters. The content within a pane can be dynamic, sourced from an attached function (referred to as a Widget in the example code below).
