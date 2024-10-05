@@ -22,7 +22,6 @@ type TUI struct {
 	loopSleep  int
 }
 
-
 // NewTUI creates new instance of TUI and returns it
 func NewTUI() *TUI {
 	t := &TUI{}

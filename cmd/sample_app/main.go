@@ -8,7 +8,7 @@ import (
 
 func getOnTUIDraw() func(*tui.TUI) int {
 	fn := func(c *tui.TUI) int {
-			return 0
+		return 0
 	}
 	return fn
 }
@@ -17,7 +17,7 @@ func getOnTUIPaneDraw(p *tui.TUIPane) func(*tui.TUIPane) int {
 	t := tui.NewTUIWidgetSample()
 	t.InitPane(p)
 	fn := func(x *tui.TUIPane) int {
-			return t.Run(x)
+		return t.Run(x)
 	}
 	return fn
 }
