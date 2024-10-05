@@ -1,20 +1,19 @@
 /*
-Package terminalui is meant to simplify printing on terminal window by
-specifying boxes and adding static or dynamic content to it. These
-boxes are called panes and they are defined by vertical or horizontal split.
-Terminal window is main pane which can be split into another panes, and these
-panes can be split again into next ones, and so on... Just like in another
-great tool which is tmux.
+The terminalui package is designed to simplify output to a terminal window
+by allowing the specification of panes with static or dynamic content. These
+panes, defined by either vertical or horizontal splits, structure the terminal
+window. The main pane, which represents the entire terminal window, can be
+split into additional panes, which in turn can be further subdivided, much
+like the functionality found in the popular tool, tmux.
 
-Pane size can be defined as a percentage or as number of characters. Pane
-content can be dynamic and coming from an attached function (in sample code
-below it's called a Widget).
+Pane sizes can be specified either as a percentage or by a fixed number of
+characters. The content within a pane can be dynamic, sourced from an attached
+function (referred to as a Widget in the example code below).
 
-Pane can have a border that can be styled by defining what characters should
-be used for it (left side, top-left corner, top bar etc.).
+Panes can also feature borders, which are customisable by defining the
+characters to be used for each side (e.g., left edge, top-left corner, top bar, etc.).
 
-Package tui implementation uses ANSI escape codes and so far has been tested
-on MacOSX and Linux. It won't work on Windows (probably Cygwin as well).
+The package utilises ANSI escape codes and has been tested on macOS and Linux.
 
 # Install
 
