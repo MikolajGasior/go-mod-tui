@@ -1,8 +1,6 @@
-# go-mod-tui
+# terminal-ui
 
-## This project is not maintained
-
-Package `MikolajGasior/go-mod-tui` is meant to simplify printing on terminal window by
+Package `mikolajgs/terminal-ui` is meant to simplify printing on terminal window by
 specifying boxes and adding static or dynamic content to it. These boxes here
 are called panes and they are defined by vertical or horizontal split.
 Terminal window is main pane which can be split into another panes, and these
@@ -26,7 +24,7 @@ Ensure you have your
 run the following:
 
 ```
-go get -u github.com/MikolajGasior/go-mod-tui
+go get -u github.com/mikolajgs/terminal-ui
 ```
 
 ### Example
@@ -38,14 +36,14 @@ package main
 
 import (
     "os"
-    "github.com/MikolajGasior/go-mod-tui"
+    "github.com/mikolajgs/terminal-ui"
 )
 
 // TUI has onDraw event and a function can be attached to it. onDraw is
 // called when TUI is being drawn, eg. when first started or when
 // terminal window is resized.
 // getOnTUIDraw returns a func that will later be attached in main().
-func getOnTUIDraw(n *NTree) func(*tui.TUI) int {
+func getOnTUIDraw() func(*tui.TUI) int {
     // It does nothing actually.
     fn := func(c *tui.TUI) int {
         return 0
@@ -57,7 +55,7 @@ func getOnTUIDraw(n *NTree) func(*tui.TUI) int {
 // is called when TUI is being drawn, eg. when first started or when
 // terminal window is resized.
 // getOnTUIPaneDraw returns a func that will later be attached in main().
-func getOnTUIPaneDraw(n *NTree, p *tui.TUIPane) func(*tui.TUIPane) int {
+func getOnTUIPaneDraw(p *tui.TUIPane) func(*tui.TUIPane) int {
     // Func is defined separate in another struct which is called a Widget.
     // This Widget prints out current time. Check the source for more.
     t := tui.NewTUIWidgetSample()
@@ -70,9 +68,9 @@ func getOnTUIPaneDraw(n *NTree, p *tui.TUIPane) func(*tui.TUIPane) int {
 
 func main() {
     // Create TUI instance
-    myTUI := tui.NewTUI("My Project", "Its description", "Author")
+    myTUI := tui.NewTUI()
     // Attach func to onDraw event
-    myTUI.SetOnDraw(getOnTUIDraw(n))
+    myTUI.SetOnDraw(getOnTUIDraw())
 
     // Get main pane which we are going to split
     p0 := myTUI.GetPane()
@@ -111,22 +109,22 @@ func main() {
     // Attach previously defined func to panes' onDraw event. onDraw
     // handler is called whenever pane is being drawn: on start and
     // on terminal window resize.
-    p11.SetOnDraw(getOnTUIPaneDraw(n, p11))
-    p12.SetOnDraw(getOnTUIPaneDraw(n, p12))
-    p21.SetOnDraw(getOnTUIPaneDraw(n, p21))
-    p22.SetOnDraw(getOnTUIPaneDraw(n, p22))
-    p31.SetOnDraw(getOnTUIPaneDraw(n, p31))
-    p32.SetOnDraw(getOnTUIPaneDraw(n, p32))
+    p11.SetOnDraw(getOnTUIPaneDraw(p11))
+    p12.SetOnDraw(getOnTUIPaneDraw(p12))
+    p21.SetOnDraw(getOnTUIPaneDraw(p21))
+    p22.SetOnDraw(getOnTUIPaneDraw(p22))
+    p31.SetOnDraw(getOnTUIPaneDraw(p31))
+    p32.SetOnDraw(getOnTUIPaneDraw(p32))
 
     // Attach previously defined func to panes' onIterate event.
     // onIterate handler is called every iteration of TUI's main loop.
     // There is a one second delay between every iteration.
-    p11.SetOnIterate(getOnTUIPaneDraw(n, p11))
-    p12.SetOnIterate(getOnTUIPaneDraw(n, p12))
-    p21.SetOnIterate(getOnTUIPaneDraw(n, p21))
-    p22.SetOnIterate(getOnTUIPaneDraw(n, p22))
-    p31.SetOnIterate(getOnTUIPaneDraw(n, p31))
-    p32.SetOnIterate(getOnTUIPaneDraw(n, p32))
+    p11.SetOnIterate(getOnTUIPaneDraw(p11))
+    p12.SetOnIterate(getOnTUIPaneDraw(p12))
+    p21.SetOnIterate(getOnTUIPaneDraw(p21))
+    p22.SetOnIterate(getOnTUIPaneDraw(p22))
+    p31.SetOnIterate(getOnTUIPaneDraw(p31))
+    p32.SetOnIterate(getOnTUIPaneDraw(p32))
 
     // Run TUI
     myTUI.Run(os.Stdout, os.Stderr)

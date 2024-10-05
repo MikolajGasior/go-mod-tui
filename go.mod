@@ -1,3 +1,3 @@
-module github.com/MikolajGasior/go-mod-tui
+module github.com/mikolajgs/terminal-ui
 
-go 1.15
+go 1.22.1

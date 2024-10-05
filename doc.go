@@ -1,5 +1,5 @@
 /*
-Package tui is meant to simplify printing on terminal window by
+Package terminalui is meant to simplify printing on terminal window by
 specifying boxes and adding static or dynamic content to it. These
 boxes are called panes and they are defined by vertical or horizontal split.
 Terminal window is main pane which can be split into another panes, and these
@@ -16,112 +16,111 @@ be used for it (left side, top-left corner, top bar etc.).
 Package tui implementation uses ANSI escape codes and so far has been tested
 on MacOSX and Linux. It won't work on Windows (probably Cygwin as well).
 
-Install
+# Install
 
 Ensure you have your workspace directory created and run the following:
 
-    go get -u github.com/MikolajGasior/go-mod-tui
+	go get -u github.com/mikolajgs/terminal-ui
 
-Example
+# Example
 
 See below sample with explanation in comments.
 
-    package main
+	package main
 
-    import (
-        "os"
-        "github.com/MikolajGasior/go-mod-tui"
-    )
+	import (
+	    "os"
+	    tui "github.com/mikolajgs/terminal-ui"
+	)
 
-    // TUI has onDraw event and a function can be attached to it. onDraw is
-    // called when TUI is being drawn, eg. when first started or when
-    // terminal window is resized.
-    // getOnTUIDraw returns a func that will later be attached in main().
-    func getOnTUIDraw(n *NTree) func(*tui.TUI) int {
-        // It does nothing actually.
-        fn := func(c *tui.TUI) int {
-            return 0
-        }
-        return fn
-    }
+	// TUI has onDraw event and a function can be attached to it. onDraw is
+	// called when TUI is being drawn, eg. when first started or when
+	// terminal window is resized.
+	// getOnTUIDraw returns a func that will later be attached in main().
+	func getOnTUIDraw() func(*tui.TUI) int {
+	    fn := func(c *tui.TUI) int {
+		      return 0
+	    }
+	    return fn
+	}
 
-    // TUIPane has onDraw event and a function can be attached to it. onDraw
-    // is called when TUI is being drawn, eg. when first started or when
-    // terminal window is resized.
-    // getOnTUIPaneDraw returns a func that will later be attached in main().
-    func getOnTUIPaneDraw(n *NTree, p *tui.TUIPane) func(*tui.TUIPane) int {
-        // Func is defined separate in another struct which is called a Widget.
-        // This Widget prints out current time. Check the source for more.
-        t := tui.NewTUIWidgetSample()
-        t.InitPane(p)
-        fn := func(x *tui.TUIPane) int {
-            return t.Run(x)
-        }
-        return fn
-    }
+	// TUIPane has onDraw event and a function can be attached to it. onDraw
+	// is called when TUI is being drawn, eg. when first started or when
+	// terminal window is resized.
+	// getOnTUIPaneDraw returns a func that will later be attached in main().
+	func getOnTUIPaneDraw(p *tui.TUIPane) func(*tui.TUIPane) int {
+	    // Func is defined separate in another struct which is called a Widget.
+	    // This Widget prints out current time. Check the source for more.
+	    t := tui.NewTUIWidgetSample()
+	    t.InitPane(p)
+	    fn := func(x *tui.TUIPane) int {
+	        return t.Run(x)
+	    }
+	    return fn
+	}
 
-    func main() {
-        // Create TUI instance
-        myTUI := tui.NewTUI("My Project", "Its description", "Author")
-        // Attach func to onDraw event
-        myTUI.SetOnDraw(getOnTUIDraw(n))
+	func main() {
+	    // Create TUI instance
+	    myTUI := tui.NewTUI()
+	    // Attach func to onDraw event
+	    myTUI.SetOnDraw(getOnTUIDraw())
 
-        // Get main pane which we are going to split
-        p0 := myTUI.GetPane()
+	    // Get main pane which we are going to split
+	    p0 := myTUI.GetPane()
 
-        // Create new panes by splitting the main pane. Split creates two
-        // panes and we have to define size of one of them. If it's the
-        // left (vertical) or top (horizontal) one then the value is lower than
-        // 0 and if it's right (vertical) or bottom (horizontal) then the value
-        // should be highter than 0. It can be a percentage of width/height or
-        // number of characters, as it's shown below.
-        p01, p02 := p0.SplitVertically(-50, tui.UNIT_PERCENT)
-        p021, p022 := p02.SplitVertically(-40, tui.UNIT_CHAR)
+	    // Create new panes by splitting the main pane. Split creates two
+	    // panes and we have to define size of one of them. If it's the
+	    // left (vertical) or top (horizontal) one then the value is lower than
+	    // 0 and if it's right (vertical) or bottom (horizontal) then the value
+	    // should be highter than 0. It can be a percentage of width/height or
+	    // number of characters, as it's shown below.
+	    p01, p02 := p0.SplitVertically(-50, tui.UNIT_PERCENT)
+	    p021, p022 := p02.SplitVertically(-40, tui.UNIT_CHAR)
 
-        p11, p12 := p01.SplitHorizontally(20, tui.UNIT_CHAR)
-        p21, p22 := p021.SplitHorizontally(50, tui.UNIT_PERCENT)
-        p31, p32 := p022.SplitHorizontally(-35, tui.UNIT_CHAR)
+	    p11, p12 := p01.SplitHorizontally(20, tui.UNIT_CHAR)
+	    p21, p22 := p021.SplitHorizontally(50, tui.UNIT_PERCENT)
+	    p31, p32 := p022.SplitHorizontally(-35, tui.UNIT_CHAR)
 
-        // Create style instances which will be attached to certain panes
-        s1 := tui.NewTUIPaneStyleFrame()
-        s2 := tui.NewTUIPaneStyleMargin()
+	    // Create style instances which will be attached to certain panes
+	    s1 := tui.NewTUIPaneStyleFrame()
+	    s2 := tui.NewTUIPaneStyleMargin()
 
-        // Create custom TUIPaneStyle. Previous ones are predefined and come
-        // with the package.
-        s3 := &tui.TUIPaneStyle{
-            NE: "/", NW: "\\", SE: " ", SW: " ", E: " ", W: " ", N: "_", S: " ",
-        }
+	    // Create custom TUIPaneStyle. Previous ones are predefined and come
+	    // with the package.
+	    s3 := &tui.TUIPaneStyle{
+	        NE: "/", NW: "\\", SE: " ", SW: " ", E: " ", W: " ", N: "_", S: " ",
+	    }
 
-        // Set pane styles.
-        p11.SetStyle(s1)
-        p12.SetStyle(s1)
-        p21.SetStyle(s2)
-        p22.SetStyle(s2)
-        p31.SetStyle(s3)
-        p32.SetStyle(s1)
+	    // Set pane styles.
+	    p11.SetStyle(s1)
+	    p12.SetStyle(s1)
+	    p21.SetStyle(s2)
+	    p22.SetStyle(s2)
+	    p31.SetStyle(s3)
+	    p32.SetStyle(s1)
 
-        // Attach previously defined func to panes' onDraw event. onDraw
-        // handler is called whenever pane is being drawn: on start and
-        // on terminal window resize.
-        p11.SetOnDraw(getOnTUIPaneDraw(n, p11))
-        p12.SetOnDraw(getOnTUIPaneDraw(n, p12))
-        p21.SetOnDraw(getOnTUIPaneDraw(n, p21))
-        p22.SetOnDraw(getOnTUIPaneDraw(n, p22))
-        p31.SetOnDraw(getOnTUIPaneDraw(n, p31))
-        p32.SetOnDraw(getOnTUIPaneDraw(n, p32))
+	    // Attach previously defined func to panes' onDraw event. onDraw
+	    // handler is called whenever pane is being drawn: on start and
+	    // on terminal window resize.
+	    p11.SetOnDraw(getOnTUIPaneDraw(p11))
+	    p12.SetOnDraw(getOnTUIPaneDraw(p12))
+	    p21.SetOnDraw(getOnTUIPaneDraw(p21))
+	    p22.SetOnDraw(getOnTUIPaneDraw(p22))
+	    p31.SetOnDraw(getOnTUIPaneDraw(p31))
+	    p32.SetOnDraw(getOnTUIPaneDraw(p32))
 
-        // Attach previously defined func to panes' onIterate event.
-        // onIterate handler is called every iteration of TUI's main loop.
-        // There is a one second delay between every iteration.
-        p11.SetOnIterate(getOnTUIPaneDraw(n, p11))
-        p12.SetOnIterate(getOnTUIPaneDraw(n, p12))
-        p21.SetOnIterate(getOnTUIPaneDraw(n, p21))
-        p22.SetOnIterate(getOnTUIPaneDraw(n, p22))
-        p31.SetOnIterate(getOnTUIPaneDraw(n, p31))
-        p32.SetOnIterate(getOnTUIPaneDraw(n, p32))
+	    // Attach previously defined func to panes' onIterate event.
+	    // onIterate handler is called every iteration of TUI's main loop.
+	    // There is a one second delay between every iteration.
+	    p11.SetOnIterate(getOnTUIPaneDraw(p11))
+	    p12.SetOnIterate(getOnTUIPaneDraw(p12))
+	    p21.SetOnIterate(getOnTUIPaneDraw(p21))
+	    p22.SetOnIterate(getOnTUIPaneDraw(p22))
+	    p31.SetOnIterate(getOnTUIPaneDraw(p31))
+	    p32.SetOnIterate(getOnTUIPaneDraw(p32))
 
-        // Run TUI
-        myTUI.Run(os.Stdout, os.Stderr)
-    }
+	    // Run TUI
+	    myTUI.Run(os.Stdout, os.Stderr)
+	}
 */
-package tui
+package terminalui
