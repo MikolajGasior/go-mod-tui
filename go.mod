@@ -1,3 +1,5 @@
-module github.com/mikolajgs/terminal-ui
+module github.com/go-phings/terminal-ui
 
-go 1.22.1
+go 1.23.4
+
+require github.com/mikolajgs/terminal-ui v0.2.0
