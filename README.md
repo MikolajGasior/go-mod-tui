@@ -1,6 +1,6 @@
 # terminal-ui
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/mikolajgs/terminal-ui.svg)](https://pkg.go.dev/github.com/mikolajgs/terminal-ui) [![Go Report Card](https://goreportcard.com/badge/github.com/mikolajgs/terminal-ui)](https://goreportcard.com/report/github.com/mikolajgs/terminal-ui) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mikolajgs/terminal-ui?sort=semver)
+[![Go Reference](https://pkg.go.dev/badge/github.com/go-phings/terminal-ui.svg)](https://pkg.go.dev/github.com/go-phings/terminal-ui) [![Go Report Card](https://goreportcard.com/badge/github.com/go-phings/terminal-ui)](https://goreportcard.com/report/github.com/go-phings/terminal-ui)
 
 The `terminalui` package is designed to simplify output to a terminal window by allowing the specification of panes with static or dynamic content. These panes, defined by either vertical or horizontal splits, structure the terminal window. The main pane, which represents the entire terminal window, can be split into additional panes, which in turn can be further subdivided, much like the functionality found in the popular tool, tmux.
 
@@ -17,7 +17,7 @@ Ensure you have your
 run the following:
 
 ```
-go get -u github.com/mikolajgs/terminal-ui
+go get -u github.com/go-phings/terminal-ui
 ```
 
 ### Example
@@ -29,7 +29,7 @@ package main
 
 import (
     "os"
-    tui "github.com/mikolajgs/terminal-ui"
+    tui "github.com/go-phings/terminal-ui"
 )
 
 // TUI has onDraw event and a function can be attached to it. onDraw is
