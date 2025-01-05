@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	tui "github.com/mikolajgs/terminal-ui"
+	tui "github.com/go-phings/terminal-ui"
 )
 
 func getOnTUIDraw() func(*tui.TUI) int {
